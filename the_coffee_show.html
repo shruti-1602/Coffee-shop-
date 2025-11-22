@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Coffee Show</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #6F4E37;
+            --secondary-color: #A0522D;
+            --text-color: #333;
+            --light-bg: #F5F5DC;
+            --dark-bg: #2C1B1B;
+            --white: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        section {
+            padding: 50px 10%;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 5px;
+            font-weight: 600;
+            margin-top: 15px;
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .navbar a {
+            font-size: 1rem;
+            margin: 0 15px;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .nav-icons i {
+            font-size: 1.2rem;
+            margin-left: 15px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        #menu-btn { display: none; }
+
+        .home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            width: 100%;
+            height: 90vh;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            box-shadow: var(--shadow);
+            background-image: url('1000057844.jpg');
+        }
+
+        .hero-text {
+            max-width: 500px;
+            margin-left: 5%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+        }
+
+        .menu { background-color: var(--white); }
+
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--light-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .menu-item .price {
+            display: block;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .delivery-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 30px;
+            border-radius: 10px;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .delivery-image img { width: 100%; }
+
+        .contact { background-color: var(--dark-bg); color: var(--light-bg); }
+        .contact h2 { color: var(--white); }
+
+        .contact-info {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .contact-details i { margin-right: 10px; color: var(--secondary-color); }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background: #444;
+            color: var(--white);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--dark-bg);
+            color: var(--secondary-color);
+            border-top: 1px solid #555;
+        }
+
+        @media (max-width: 768px) {
+            .navbar { position: absolute; top: 100%; left: 0; right: 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
+            .navbar.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+            #menu-btn { display: inline-block; }
+            .delivery-content { flex-direction: column; }
+            .contact-info { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">The Coffee Show</div>
+    <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#menu">Menu Card</a>
+        <a href="#delivery">Online Delivery</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-icons">
+        <i class="fas fa-search"></i>
+        <i class="fas fa-shopping-cart"></i>
+        <i class="fas fa-bars" id="menu-btn"></i>
+    </div>
+</header>
+
+<section class="home" id="home">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1>Freshly Brewed Excellence</h1>
+            <p>Start your day with the perfect cup of coffee, delivered right to your door.</p>
+            <a href="#delivery" class="btn">Order Now</a>
+        </div>
+    </div>
+</section>
+
+<section class="menu" id="menu">
+    <h2>Our Menu Card</h2>
+    <div class="menu-container">
+
+        <div class="menu-item">
+            <img src="1000057846.jpg" alt="Espresso">
+            <h3>Classic Espresso</h3>
+            <p>Strong, concentrated coffee for a quick boost.</p>
+            <span class="price">₹270</span>
+        </div>
+
+        <div class="menu-item">
+            <img src="1000057845.jpg" alt="Latte">
+            <h3>Vanilla Latte</h3>
+            <p>Smooth espresso with steamed milk and vanilla syrup.</p>
+            <span class="price">₹405</span>
+        </div>
+
+        <div class="menu-item">
+            <img src="1000057849.jpg" alt="Cappuccino">
+            <h3>Cappuccino</h3>
+            <p>Equal parts espresso, steamed milk, and foamed milk.</p>
+            <span class="price">₹360</span>
+        </div>
+
+        <div class="menu-item">
+            <img src="1000057848.jpg" alt="Croissant">
+            <h3>Fresh Croissant</h3>
+            <p>Perfectly flaky and buttery pastry for breakfast.</p>
+            <span class="price">₹315</span>
+        </div>
+
+        <div class="menu-item">
+            <img src="1000057839.jpg" alt="Coffee Beans">
+            <h3>Bag of Premium Beans</h3>
+            <p>Roast of the Month - Grind your own perfection.</p>
+            <span class="price">₹1350</span>
+        </div>
+
+        <div class="menu-item">
+            <img src="1000057847.jpg" alt="Iced Coffee">
+            <h3>Signature Iced Coffee</h3>
+            <p>Our famous cold brew, smooth and refreshing.</p>
+            <span class="price">₹450</span>
+        </div>
+
+    </div>
+</section>
+
+<section class="delivery" id="delivery">
+    <h2>Online Delivery Service</h2>
+    <div class="delivery-content">
+        <div class="delivery-text">
+            <h3>Get Your Coffee Delivered Fast!</h3>
+            <p>Enjoy your favorite coffee and treats without leaving your home or office.</p>
+            <ul>
+                <li>Minimum Order: <b>₹900</b></li>
+                <li>Delivery Fee: <b>₹180</b> (Free above ₹2250)</li>
+                <li>Estimated Delivery Time: 30 - 45 Minutes</li>
+            </ul>
+            <button class="btn">Place Online Order</button>
+        </div>
+        <div class="delivery-image">
+            <img src="1000057850.png" alt="Delivery">
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <h2>Contact & Location</h2>
+    <div class="contact-info">
+        <div class="contact-details">
+            <h3>Get in Touch</h3>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> info@thecoffeeshow.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Coffee Lane, Brew City</p>
+            <p><i class="fas fa-clock"></i> Mon - Sat, 7 AM - 7 PM</p>
+        </div>
+
+        <div class="contact-form">
+            <h3>Send Us a Message</h3>
+            <form id="contactForm">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button class="btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 The Coffee Show. All Rights Reserved.</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('menu-btn');
+    const navbar = document.querySelector('.navbar');
+    const contactForm = document.getElementById('contactForm');
+
+    menuBtn.addEventListener('click', function() {
+        navbar.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.navbar a').forEach(link => {
+        link.addEventListener('click', () => {
+            navbar.classList.remove('active');
+        });
+    });
+
+    contactForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        alert('Thank you! We will get back to you shortly.');
+        contactForm.reset();
+    });
+});
+</script>
+
+</body>
+</html>
